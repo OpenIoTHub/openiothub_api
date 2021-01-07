@@ -170,7 +170,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: cec96b9630a9b189242b2495681d8545afb567c5
+      resolved-ref: "243253b00fcb091995bb123e41c65497c2d1a6dd"
       url: "https://github.com/OpenIoTHub/openiothub_constants"
     source: git
     version: "0.0.1"
@@ -179,7 +179,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b115c23ad47b35fab1193a2542927101f85fe679
+      resolved-ref: "4fdca9123bce4912df7cc1bda113b574d5a8a17c"
       url: "https://github.com/OpenIoTHub/openiothub-grpc-api"
     source: git
     version: "1.0.0"

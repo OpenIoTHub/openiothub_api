@@ -1,6 +1,6 @@
 # openiothub_api
 
-openiothub_api
+云易连的API，包含grpc函数的一些封装和一些工具函数
 
 ## Getting Started
 

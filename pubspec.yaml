@@ -19,13 +19,13 @@ dependencies:
   #  grpc协议
   protobuf: ^1.0.1
   openiothub_constants:
-    git: https://github.com/OpenIoTHub/openiothub_constants
+    git: https://gitee.com/OpenIoTHub/openiothub_constants
   openiothub_grpc_api:
-    git: https://github.com/OpenIoTHub/openiothub-grpc-api
+    git: https://gitee.com/OpenIoTHub/openiothub-grpc-api
   server_grpc_api:
-    git: https://github.com/OpenIoTHub/server-grpc-api
+    git: https://gitee.com/OpenIoTHub/server-grpc-api
   gateway_grpc_api:
-    git: https://github.com/OpenIoTHub/gateway-grpc-api
+    git: https://gitee.com/OpenIoTHub/gateway-grpc-api
 
 dev_dependencies:
   flutter_test:

@@ -7,11 +7,11 @@ import 'package:grpc/grpc.dart';
 class UserManager {
 //  注册用户
 //  rpc RegisterUserWithUserInfo (LoginInfo) returns (OperationResponse) {}
-  static Future<OperationResponse> RegisterUserWithUserInfo(LoginInfo userInfo) async {
+  static Future<OperationResponse> RegisterUserWithUserInfo(LoginInfo loginInfo) async {
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = UserManagerClient(channel);
     OperationResponse operationResponse =
-    await stub.registerUserWithUserInfo(userInfo);
+    await stub.registerUserWithLoginInfo(loginInfo);
     print('RegisterUserWithUserInfo: ${operationResponse}');
     channel.shutdown();
     return operationResponse;

@@ -1,4 +1,3 @@
-import 'package:openiothub_constants/constants/Config.dart';
 import 'package:grpc/grpc.dart';
 
 class Channel {

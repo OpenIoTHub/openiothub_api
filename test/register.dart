@@ -7,9 +7,7 @@ import 'package:openiothub_api/openiothub_api.dart';
 void main() async {
   LoginInfo loginInfo = LoginInfo();
   loginInfo.userMobile = "17076241859";
-  loginInfo.password = "123456abc";
+  loginInfo.password = "123456";
   OperationResponse operationResponse = await UserManager.RegisterUserWithUserInfo(loginInfo);
   print(operationResponse);
-  UserLoginResponse userLoginResponse = await UserManager.LoginWithUserLoginInfo(loginInfo);
-  print(userLoginResponse.userInfo);
 }

@@ -1,10 +1,6 @@
-import 'package:grpc/grpc.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:iot_manager_grpc_api/pb/mqttDeviceManager.pbgrpc.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pbgrpc.dart';
 import 'package:openiothub_api/api/IoTManager/IoTManagerChannel.dart';
-import 'package:openiothub_api/utils/utils.dart';
 
 class MqttDeviceManager {
   // rpc AddMqttDevice (MqttDeviceInfo) returns (OperationResponse) {}
@@ -39,6 +35,16 @@ class MqttDeviceManager {
     print('MqttDeviceInfoList: ${mqttDeviceInfoList}');
     channel.shutdown();
     return mqttDeviceInfoList;
+  }
+  // rpc GenerateMqttUsernamePassword (MqttDeviceInfo) returns (MqttInfo) {}
+  static Future<MqttInfo> GenerateMqttUsernamePassword(MqttDeviceInfo mqttDeviceInfo) async {
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = MqttDeviceManagerClient(channel);
+    MqttInfo mqttInfo =
+    await stub.generateMqttUsernamePassword(mqttDeviceInfo);
+    print('MqttInfo: ${mqttInfo}');
+    channel.shutdown();
+    return mqttInfo;
   }
   // rpc GetAllMqttDeviceModels (Empty) returns (MqttDeviceModelList) {}
   static Future<MqttDeviceModelList> GetAllMqttDeviceModels() async {

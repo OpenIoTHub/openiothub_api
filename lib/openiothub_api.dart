@@ -10,5 +10,7 @@ export './api/OpenIoTHub/Utils.dart';
 
 export './api/Server/HttpManager.dart';
 
-export './utils/utils.dart';
+export './utils/check.dart';
+export './utils/jwt.dart';
+export './utils/uuid.dart';
 export './utils/zipDevice.dart';

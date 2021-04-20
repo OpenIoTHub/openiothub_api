@@ -3,6 +3,7 @@ library openiothub_api;
 export './api/GateWay/GatewayLoginManager.dart';
 
 export './api/IoTManager/UserManager.dart';
+export './api/IoTManager/MqttDeviceManager.dart';
 
 export './api/OpenIoTHub/CommonDeviceApi.dart';
 export './api/OpenIoTHub/SessionApi.dart';

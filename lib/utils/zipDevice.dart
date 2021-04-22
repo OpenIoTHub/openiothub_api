@@ -12,7 +12,7 @@ class ZipLocalDevice {
 
   ZipLocalDevice(this.name, this.ip, this.mac, this.type, this.type_name);
 
-  void configMqttServer(MqttInfo mqttInfo) async {
+  Future<void> configMqttServer(MqttInfo mqttInfo) async {
     var DESTINATION_ADDRESS = InternetAddress("255.255.255.255");
     String config = '''{
                 "mac":"${mac}",

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:iot_manager_grpc_api/pb/mqttDeviceManager.pb.dart';
+
 class ZipLocalDevice {
   String name;
   String ip;
@@ -9,6 +11,27 @@ class ZipLocalDevice {
   String type_name;
 
   ZipLocalDevice(this.name, this.ip, this.mac, this.type, this.type_name);
+
+  void configMqttServer(MqttInfo mqttInfo) async {
+    var DESTINATION_ADDRESS = InternetAddress("255.255.255.255");
+    String config = '''{
+                "mac":"${mac}",
+                "setting":
+                {
+                  "mqtt_uri":"${mqttInfo.mqttServerHost}",
+                  "mqtt_port":${mqttInfo.mqttServerPort},
+                  "mqtt_user":"${mqttInfo.mqttClientUserName}",
+                  "mqtt_password":"${mqttInfo.mqttClientUserPassword}"
+                }
+              }''';
+    await RawDatagramSocket.bind(InternetAddress.anyIPv4, 10181)
+        .then((RawDatagramSocket socket) async {
+      socket.broadcastEnabled = true;
+      await socket.send(config.codeUnits, DESTINATION_ADDRESS, 10182);
+      await Future.delayed(Duration(seconds: 1));
+      await socket.send(config.codeUnits, DESTINATION_ADDRESS, 10182);
+    });
+  }
 
   static ZipLocalDevice fromMap(Map<String, dynamic> device) {
     ZipLocalDevice zipLocalDevice = ZipLocalDevice(
@@ -64,7 +87,8 @@ Future<List<ZipLocalDevice>> findZipDevicesFromLocal(int timeOut) async {
     });
     socket.send(
         '{"cmd":"device report"}'.codeUnits, DESTINATION_ADDRESS, 10182);
-    await Future.delayed(Duration(seconds: timeOut)).then((value) => socket.close());
+    await Future.delayed(Duration(seconds: timeOut))
+        .then((value) => socket.close());
     print("findZipDevicesFromLocal:${zipLocalDeviceList.length}");
   });
   return zipLocalDeviceList;

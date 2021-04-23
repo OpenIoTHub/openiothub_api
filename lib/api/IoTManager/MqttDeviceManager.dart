@@ -1,13 +1,17 @@
+import 'package:grpc/grpc.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:iot_manager_grpc_api/pb/mqttDeviceManager.pbgrpc.dart';
 import 'package:openiothub_api/api/IoTManager/IoTManagerChannel.dart';
+import 'package:openiothub_api/openiothub_api.dart';
 
 class MqttDeviceManager {
   // rpc AddMqttDevice (MqttDeviceInfo) returns (OperationResponse) {}
   static Future<OperationResponse> AddMqttDevice(
       MqttDeviceInfo mqttDeviceInfo) async {
+    String jwt = await getJWT();
     final channel = await Channel.getDefaultIoTManagerChannel();
-    final stub = MqttDeviceManagerClient(channel);
+    final stub = MqttDeviceManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
     OperationResponse operationResponse =
     await stub.addMqttDevice(mqttDeviceInfo);
     print('OperationResponse: ${operationResponse}');
@@ -17,8 +21,10 @@ class MqttDeviceManager {
   // rpc DelMqttDevice (MqttDeviceInfo) returns (OperationResponse) {}
   static Future<OperationResponse> DelMqttDevice(
       MqttDeviceInfo mqttDeviceInfo) async {
+    String jwt = await getJWT();
     final channel = await Channel.getDefaultIoTManagerChannel();
-    final stub = MqttDeviceManagerClient(channel);
+    final stub = MqttDeviceManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
     OperationResponse operationResponse =
     await stub.delMqttDevice(mqttDeviceInfo);
     print('OperationResponse: ${operationResponse}');
@@ -27,9 +33,11 @@ class MqttDeviceManager {
   }
   // rpc GetAllMqttDevice (Empty) returns (MqttDeviceInfoList) {}
   static Future<MqttDeviceInfoList> GetAllMqttDevice() async {
+    String jwt = await getJWT();
     Empty empty = Empty();
     final channel = await Channel.getDefaultIoTManagerChannel();
-    final stub = MqttDeviceManagerClient(channel);
+    final stub = MqttDeviceManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
     MqttDeviceInfoList mqttDeviceInfoList =
     await stub.getAllMqttDevice(empty);
     print('MqttDeviceInfoList: ${mqttDeviceInfoList}');
@@ -38,8 +46,10 @@ class MqttDeviceManager {
   }
   // rpc GenerateMqttUsernamePassword (MqttDeviceInfo) returns (MqttInfo) {}
   static Future<MqttInfo> GenerateMqttUsernamePassword(MqttDeviceInfo mqttDeviceInfo) async {
+    String jwt = await getJWT();
     final channel = await Channel.getDefaultIoTManagerChannel();
-    final stub = MqttDeviceManagerClient(channel);
+    final stub = MqttDeviceManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
     MqttInfo mqttInfo =
     await stub.generateMqttUsernamePassword(mqttDeviceInfo);
     print('MqttInfo: ${mqttInfo}');
@@ -48,9 +58,11 @@ class MqttDeviceManager {
   }
   // rpc GetAllMqttDeviceModels (Empty) returns (MqttDeviceModelList) {}
   static Future<MqttDeviceModelList> GetAllMqttDeviceModels() async {
+    String jwt = await getJWT();
     Empty empty = Empty();
     final channel = await Channel.getDefaultIoTManagerChannel();
-    final stub = MqttDeviceManagerClient(channel);
+    final stub = MqttDeviceManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
     MqttDeviceModelList mqttDeviceModelList =
     await stub.getAllMqttDeviceModels(empty);
     print('MqttDeviceModelList: ${mqttDeviceModelList}');

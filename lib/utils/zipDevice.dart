@@ -13,24 +13,20 @@ class ZipLocalDevice {
   ZipLocalDevice(this.name, this.ip, this.mac, this.type, this.type_name);
 
   Future<void> configMqttServer(MqttInfo mqttInfo) async {
+    String config = '{"mac":"${mac}","setting":{"mqtt_uri":"${mqttInfo.mqttServerHost}","mqtt_port":${mqttInfo.mqttServerPort},"mqtt_user":"${mqttInfo.mqttClientUserName}","mqtt_password":"${mqttInfo.mqttClientUserPassword}"}}';
+    await send(config);
+  }
+
+  Future<void> send(String message) async {
     var DESTINATION_ADDRESS = InternetAddress("255.255.255.255");
-    String config = '''{
-                "mac":"${mac}",
-                "setting":
-                {
-                  "mqtt_uri":"${mqttInfo.mqttServerHost}",
-                  "mqtt_port":${mqttInfo.mqttServerPort},
-                  "mqtt_user":"${mqttInfo.mqttClientUserName}",
-                  "mqtt_password":"${mqttInfo.mqttClientUserPassword}"
-                }
-              }''';
-    await RawDatagramSocket.bind(InternetAddress.anyIPv4, 10181)
-        .then((RawDatagramSocket socket) async {
-      socket.broadcastEnabled = true;
-      await socket.send(config.codeUnits, DESTINATION_ADDRESS, 10182);
-      await Future.delayed(Duration(seconds: 1));
-      await socket.send(config.codeUnits, DESTINATION_ADDRESS, 10182);
-    });
+    RawDatagramSocket socket = await RawDatagramSocket.bind(InternetAddress.anyIPv4, 10181);
+    socket.broadcastEnabled = true;
+    await socket.send(message.codeUnits, DESTINATION_ADDRESS, 10182);
+    await Future.delayed(Duration(seconds: 1));
+    await socket.send(message.codeUnits, DESTINATION_ADDRESS, 10182);
+    await Future.delayed(Duration(seconds: 1));
+    await socket.send(message.codeUnits, DESTINATION_ADDRESS, 10182);
+    await socket.close();
   }
 
   static ZipLocalDevice fromMap(Map<String, dynamic> device) {
@@ -100,6 +96,13 @@ main() async {
   if (zipLocalDeviceList != null) {
     await zipLocalDeviceList.forEach((ZipLocalDevice zipLocalDevice) {
       print("main:$zipLocalDevice");
+      // zipLocalDevice.send('{"mac":"${zipLocalDevice.mac}","setting":{"name":"${zipLocalDevice.mac}"}}');
+      // zipLocalDevice.send('{"mac":"${zipLocalDevice.mac}","setting":{"mqtt_uri":null}}');
+      MqttInfo mqttInfo = MqttInfo();
+      mqttInfo.mqttServerHost="192.168.123.118";
+      mqttInfo.mqttServerPort=1883;
+      zipLocalDevice.configMqttServer(mqttInfo);
     });
   }
+  await Future.delayed(Duration(seconds: 1));
 }

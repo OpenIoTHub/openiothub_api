@@ -15,10 +15,15 @@ class UtilApi {
 
   static Future<void> loadAllConfig() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (!await prefs.containsKey(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY)) {
+      return;
+    }
     String allconfig =
         await prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY);
     print("loadAllConfig:$allconfig");
-    setAllConfig(allconfig);
+    if (allconfig != null) {
+      setAllConfig(allconfig);
+    }
   }
 
 //获取本地的所有mdns列表

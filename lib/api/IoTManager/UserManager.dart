@@ -32,6 +32,50 @@ class UserManager {
     return userLoginResponse;
   }
 
+//    使用微信登录账号获取jwt
+//    rpc LoginWithWechatCode (StringValue) returns (UserLoginResponse) {}
+  static Future<UserLoginResponse> LoginWithWechatCode(
+      String code) async {
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = UserManagerClient(channel);
+    StringValue stringValue = StringValue();
+    stringValue.value = code;
+    UserLoginResponse userLoginResponse =
+    await stub.loginWithWechatCode(stringValue);
+    print('GetUserLoginResponse: ${userLoginResponse}');
+    channel.shutdown();
+    return userLoginResponse;
+  }
+//    账号绑定微信
+//    rpc BindWithWechatCode (StringValue) returns (OperationResponse) {}
+  static Future<OperationResponse> BindWithWechatCode(
+      String code) async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = UserManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    StringValue stringValue = StringValue();
+    stringValue.value = code;
+    OperationResponse operationResponse =
+    await stub.bindWithWechatCode(stringValue);
+    print('GetUserLoginResponse: ${operationResponse}');
+    channel.shutdown();
+    return operationResponse;
+  }
+//    账号解绑微信
+//   rpc UnbindWechat (Empty) returns (OperationResponse) {}
+  static Future<OperationResponse> UnbindWechat() async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = UserManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    Empty empty = Empty();
+    OperationResponse operationResponse =
+    await stub.unbindWechat(empty);
+    print('GetUserLoginResponse: ${operationResponse}');
+    channel.shutdown();
+    return operationResponse;
+  }
 //  rpc GetUserInfo (Empty) returns (UserInfo) {}
   static Future<UserInfo> GetUserInfo() async {
     String jwt = await getJWT();
@@ -45,6 +89,20 @@ class UserManager {
     return userInfo;
   }
 
+  //    获取用户的微信信息
+  // rpc GetUserWechatInfoByCode (StringValue) returns (WechatUserInfo) {}
+  static Future<WechatUserInfo> GetUserWechatInfoByCode(
+      String code) async {
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = UserManagerClient(channel);
+    StringValue stringValue = StringValue();
+    stringValue.value = code;
+    WechatUserInfo wechatUserInfo =
+    await stub.getUserWechatInfoByCode(stringValue);
+    print('GetUserLoginResponse: ${wechatUserInfo}');
+    channel.shutdown();
+    return wechatUserInfo;
+  }
 //  更新用户信息
 //  rpc UpdateUserNanme (StringValue) returns (OperationResponse) {}
   static Future<OperationResponse> UpdateUserNanme(

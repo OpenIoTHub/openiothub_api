@@ -112,7 +112,7 @@ class UserManager {
     final stub = UserManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
     OperationResponse operationResponse =
-        await stub.updateUserNanme(stringValue);
+        await stub.updateUserName(stringValue);
     print('UpdateUserNanme: ${operationResponse}');
     channel.shutdown();
     return operationResponse;

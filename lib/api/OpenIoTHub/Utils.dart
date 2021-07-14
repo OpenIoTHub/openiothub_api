@@ -8,7 +8,7 @@ import 'package:openiothub_constants/openiothub_constants.dart';
 class UtilApi {
   static Future<void> saveAllConfig() async {
     final allconfig = await getAllConfig();
-    print("getAllConfig:$allconfig");
+    print("====saveAllConfig:$allconfig");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY, allconfig);
   }
@@ -20,7 +20,7 @@ class UtilApi {
     }
     String allconfig =
         await prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY);
-    print("loadAllConfig:$allconfig");
+    print("====loadAllConfig:$allconfig");
     if (allconfig != null) {
       setAllConfig(allconfig);
     }

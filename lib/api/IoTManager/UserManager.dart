@@ -173,4 +173,18 @@ class UserManager {
     channel.shutdown();
     return operationResponse;
   }
+
+  // rpc GetAllConfig (Empty) returns (StringValue) {}
+  static Future<StringValue> GetAllConfig() async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = UserManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    Empty empty = Empty();
+    StringValue stringValue =
+    await stub.getAllConfig(empty);
+    print('GetAllConfig: ${stringValue}');
+    channel.shutdown();
+    return stringValue;
+  }
 }

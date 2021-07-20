@@ -56,17 +56,4 @@ class MqttDeviceManager {
     channel.shutdown();
     return mqttInfo;
   }
-  // rpc GetAllMqttDeviceModels (Empty) returns (MqttDeviceModelList) {}
-  static Future<MqttDeviceModelList> GetAllMqttDeviceModels() async {
-    String jwt = await getJWT();
-    Empty empty = Empty();
-    final channel = await Channel.getDefaultIoTManagerChannel();
-    final stub = MqttDeviceManagerClient(channel,
-        options: CallOptions(metadata: {'jwt': jwt}));
-    MqttDeviceModelList mqttDeviceModelList =
-    await stub.getAllMqttDeviceModels(empty);
-    print('MqttDeviceModelList: ${mqttDeviceModelList}');
-    channel.shutdown();
-    return mqttDeviceModelList;
-  }
 }

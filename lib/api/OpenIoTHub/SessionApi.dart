@@ -26,7 +26,7 @@ class SessionApi {
   static Future<SessionList> getAllSession() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);
-    final response = await stub.getAllSession(new Empty());
+    final response = await stub.getAllSession(new OpenIoTHubEmpty());
     print('getAllSession received: ${response.sessionConfigs}');
     channel.shutdown();
     return response;
@@ -51,7 +51,7 @@ class SessionApi {
     return response;
   }
 
-  static Future<Empty> refreshmDNSServices(SessionConfig sessionConfig) async {
+  static Future<OpenIoTHubEmpty> refreshmDNSServices(SessionConfig sessionConfig) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);
     final response = await stub.refreshmDNSProxyList(sessionConfig);

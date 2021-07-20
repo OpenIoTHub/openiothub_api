@@ -1,4 +1,5 @@
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
+import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_grpc_api/pb/service.pb.dart';
 import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
@@ -6,6 +7,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 
 class UtilApi {
+  static Future<OpenIoTHubOperationResponse> SyncConfigWithToken() async {
+    String jwt = await getJWT();
+    final channel = await Channel.getOpenIoTHubChannel();
+    final stub = UtilsClient(channel);
+    IoTManagerServerAndToken ioTManagerServerAndToken = IoTManagerServerAndToken();
+    ioTManagerServerAndToken.host = Config.iotManagergRpcIp;
+    ioTManagerServerAndToken.port = Config.iotManagerRpcPort;
+    ioTManagerServerAndToken.token = jwt;
+    OpenIoTHubOperationResponse response = await stub.syncConfigWithToken(ioTManagerServerAndToken);
+    channel.shutdown();
+    return response;
+  }
+
   static Future<void> saveAllConfig() async {
     final allconfig = await getAllConfig();
     print("====saveAllConfig:$allconfig");
@@ -30,7 +44,7 @@ class UtilApi {
   static Future<MDNSServiceList> getAllmDNSServiceList() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    final response = await stub.getAllmDNSServiceList(Empty());
+    final response = await stub.getAllmDNSServiceList(OpenIoTHubEmpty());
     channel.shutdown();
     print("===getAllmDNSServiceList：${response.mDNSServices}");
     return response;
@@ -40,7 +54,7 @@ class UtilApi {
   static Future<MDNSServiceList> getOnemDNSServiceList(String type) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    StringValue sv = StringValue();
+    OpenIoTHubStringValue sv = OpenIoTHubStringValue();
     sv.value = type;
     final response = await stub.getmDNSServiceListByType(sv);
     channel.shutdown();
@@ -52,9 +66,9 @@ class UtilApi {
   static Future<String> convertOctonaryUtf8(String oldString) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    var stringValue = StringValue();
-    stringValue.value = oldString;
-    final response = await stub.convertOctonaryUtf8(stringValue);
+    var openIoTHubStringValue = OpenIoTHubStringValue();
+    openIoTHubStringValue.value = oldString;
+    final response = await stub.convertOctonaryUtf8(openIoTHubStringValue);
     channel.shutdown();
     return response.value;
   }
@@ -63,7 +77,7 @@ class UtilApi {
   static Future<String> getAllConfig() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    Empty empty = Empty();
+    OpenIoTHubEmpty empty = OpenIoTHubEmpty();
     final response = await stub.getAllConfig(empty);
     channel.shutdown();
     return response.value;
@@ -73,7 +87,7 @@ class UtilApi {
   static Future<void> setAllConfig(String config) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    StringValue sv = StringValue();
+    OpenIoTHubStringValue sv = OpenIoTHubStringValue();
     sv.value = config;
     final response = await stub.loadAllConfig(sv);
     channel.shutdown();
@@ -84,7 +98,7 @@ class UtilApi {
   static Future<TokenModel> getTokenModel(String tokenStr) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    StringValue sv = StringValue();
+    OpenIoTHubStringValue sv = OpenIoTHubStringValue();
     sv.value = tokenStr;
     final response = await stub.getTokenModel(sv);
     channel.shutdown();

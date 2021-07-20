@@ -50,7 +50,7 @@ class CommonDeviceApi {
   static Future<DeviceList> getAllDevice() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = CommonDeviceManagerClient(channel);
-    final response = await stub.getAllDevice(Empty());
+    final response = await stub.getAllDevice(OpenIoTHubEmpty());
     print('Greeter client received: ${response}');
     channel.shutdown();
     return response;

@@ -53,4 +53,15 @@ class HostManager {
     channel.shutdown();
     return hostInfoList;
   }
+  // rpc SetDeviceMac (HostInfo) returns (OperationResponse) {}
+  static Future<OperationResponse> SetDeviceMac(HostInfo hostInfo) async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = HostManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    OperationResponse hostInfoList = await stub.setDeviceMac(hostInfo);
+    print('SetDeviceMac: ${hostInfoList}');
+    channel.shutdown();
+    return hostInfoList;
+  }
 }

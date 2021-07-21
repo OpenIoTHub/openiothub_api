@@ -1,3 +1,6 @@
+import 'package:iot_manager_grpc_api/pb/gatewayManager.pb.dart';
+import 'package:openiothub_api/api/IoTManager/GatewayManager.dart';
+import 'package:openiothub_api/api/IoTManager/HostManager.dart';
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
 import 'package:openiothub_api/api/OpenIoTHub/Utils.dart';
 import 'package:openiothub_grpc_api/pb/service.pb.dart';
@@ -12,7 +15,7 @@ class SessionApi {
     final response = await stub.createOneSession(config);
     print('createOneSession: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+  //  从服务器创建配置再同步，所以这里不需要保存到服务器
   }
 
   static Future deleteOneSession(SessionConfig config) async {
@@ -20,7 +23,10 @@ class SessionApi {
     final stub = SessionManagerClient(channel);
     await stub.deleteOneSession(config);
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //同步删除服务器上的配置
+    GatewayInfo gatewayInfo = GatewayInfo();
+    gatewayInfo.gatewayUuid = config.runId;
+    GatewayManager.DelGateway(gatewayInfo);
   }
 
   static Future<SessionList> getAllSession() async {

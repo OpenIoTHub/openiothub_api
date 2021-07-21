@@ -1,3 +1,6 @@
+import 'package:iot_manager_grpc_api/pb/hostManager.pb.dart';
+import 'package:iot_manager_grpc_api/pb/portManager.pb.dart';
+import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_grpc_api/pb/service.pb.dart';
 import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
 
@@ -13,7 +16,11 @@ class CommonDeviceApi {
     final response = await stub.setDeviceMac(device);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //服务器同步
+    HostInfo hostInfo = HostInfo();
+    hostInfo.uUID = device.uuid;
+    hostInfo.mac = device.mac;
+    HostManager.SetDeviceMac(hostInfo);
   }
 
 //  设备网络唤醒
@@ -33,7 +40,15 @@ class CommonDeviceApi {
     final response = await stub.addDevice(device);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //服务器同步
+    HostInfo hostInfo = HostInfo();
+    hostInfo.uUID = device.uuid;
+    hostInfo.name = device.name;
+    hostInfo.description = device.description;
+    hostInfo.gatewayUUID = device.runId;
+    hostInfo.hostAddr = device.addr;
+    hostInfo.mac = device.mac;
+    HostManager.AddHost(hostInfo);
   }
 
 //  rpc DelDevice (Device) returns (Empty) {}
@@ -43,7 +58,10 @@ class CommonDeviceApi {
     final response = await stub.delDevice(device);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //服务器同步
+    HostInfo hostInfo = HostInfo();
+    hostInfo.uUID = device.uuid;
+    HostManager.DelHost(hostInfo);
   }
 
 //  rpc GetAllDevice (Empty) returns (DeviceList) {}
@@ -54,7 +72,6 @@ class CommonDeviceApi {
     print('Greeter client received: ${response}');
     channel.shutdown();
     return response;
-    UtilApi.saveAllConfig();
   }
 
   // TCP
@@ -65,7 +82,18 @@ class CommonDeviceApi {
     final response = await stub.createOneTCP(config);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //服务器同步
+    PortInfo portInfo = PortInfo();
+    portInfo.uUID = getOneUUID();
+    portInfo.name = config.name;
+    portInfo.description = config.description;
+    portInfo.bindAllAddr = config.bindAllAddr;
+    portInfo.domain = config.domain;
+    portInfo.port = config.remotePort;
+    portInfo.localPort = config.localProt;
+    portInfo.networkProtocol = "tcp";
+    portInfo.applicationProtocol = "unknown";
+    PortManager.AddPort(portInfo);
   }
 
 //  rpc DeleteOneTCP (PortConfig) returns (Empty) {}
@@ -75,7 +103,10 @@ class CommonDeviceApi {
     final response = await stub.deleteOneTCP(config);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //同步到服务器
+    PortInfo portInfo = PortInfo();
+    portInfo.uUID = config.uuid;
+    PortManager.DelPort(portInfo);
   }
 
 //  rpc GetOneTCP (PortConfig) returns (PortConfig) {}
@@ -106,7 +137,18 @@ class CommonDeviceApi {
     final response = await stub.createOneUDP(config);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //服务器同步
+    PortInfo portInfo = PortInfo();
+    portInfo.uUID = getOneUUID();
+    portInfo.name = config.name;
+    portInfo.description = config.description;
+    portInfo.bindAllAddr = config.bindAllAddr;
+    portInfo.domain = config.domain;
+    portInfo.port = config.remotePort;
+    portInfo.localPort = config.localProt;
+    portInfo.networkProtocol = "udp";
+    portInfo.applicationProtocol = "unknown";
+    PortManager.AddPort(portInfo);
   }
 
 //  rpc DeleteOneUDP (PortConfig) returns (Empty) {}
@@ -116,7 +158,10 @@ class CommonDeviceApi {
     final response = await stub.deleteOneUDP(config);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+
+    PortInfo portInfo = PortInfo();
+    portInfo.uUID = config.uuid;
+    PortManager.DelPort(portInfo);
   }
 
 //  rpc GetOneUDP (PortConfig) returns (PortConfig) {}
@@ -147,7 +192,18 @@ class CommonDeviceApi {
     final response = await stub.createOneFTP(config);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+    //服务器同步
+    PortInfo portInfo = PortInfo();
+    portInfo.uUID = getOneUUID();
+    portInfo.name = config.name;
+    portInfo.description = config.description;
+    portInfo.bindAllAddr = config.bindAllAddr;
+    portInfo.domain = config.domain;
+    portInfo.port = config.remotePort;
+    portInfo.localPort = config.localProt;
+    portInfo.networkProtocol = "tcp";
+    portInfo.applicationProtocol = "ftp";
+    PortManager.AddPort(portInfo);
   }
 
 //  rpc DeleteOneFTP (PortConfig) returns (Empty) {}
@@ -157,7 +213,10 @@ class CommonDeviceApi {
     final response = await stub.deleteOneFTP(config);
     print('Greeter client received: ${response}');
     channel.shutdown();
-    UtilApi.saveAllConfig();
+
+    PortInfo portInfo = PortInfo();
+    portInfo.uUID = config.uuid;
+    PortManager.DelPort(portInfo);
   }
 
 //  rpc GetOneFTP (PortConfig) returns (PortConfig) {}

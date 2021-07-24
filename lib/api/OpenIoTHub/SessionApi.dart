@@ -65,4 +65,14 @@ class SessionApi {
     channel.shutdown();
     return response;
   }
+  // 通知这个网关删除配置文件中的token
+  // rpc DeletRemoteGatewayConfig (SessionConfig) returns (OpenIoTHubOperationResponse) {}
+  static Future<OpenIoTHubOperationResponse> deleteRemoteGatewayConfig(SessionConfig sessionConfig) async {
+    final channel = await Channel.getOpenIoTHubChannel();
+    final stub = SessionManagerClient(channel);
+    final response = await stub.deletRemoteGatewayConfig(sessionConfig);
+    print('deletRemoteGatewayConfig received: ${response}');
+    channel.shutdown();
+    return response;
+  }
 }

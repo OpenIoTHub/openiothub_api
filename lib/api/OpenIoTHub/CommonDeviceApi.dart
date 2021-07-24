@@ -85,6 +85,7 @@ class CommonDeviceApi {
     //服务器同步
     PortInfo portInfo = PortInfo();
     portInfo.uUID = getOneUUID();
+    portInfo.hostUUID = config.device.uuid;
     portInfo.name = config.name;
     portInfo.description = config.description;
     portInfo.bindAllAddr = config.bindAllAddr;
@@ -140,6 +141,7 @@ class CommonDeviceApi {
     //服务器同步
     PortInfo portInfo = PortInfo();
     portInfo.uUID = getOneUUID();
+    portInfo.hostUUID = config.device.uuid;
     portInfo.name = config.name;
     portInfo.description = config.description;
     portInfo.bindAllAddr = config.bindAllAddr;
@@ -195,6 +197,7 @@ class CommonDeviceApi {
     //服务器同步
     PortInfo portInfo = PortInfo();
     portInfo.uUID = getOneUUID();
+    portInfo.hostUUID = config.device.uuid;
     portInfo.name = config.name;
     portInfo.description = config.description;
     portInfo.bindAllAddr = config.bindAllAddr;

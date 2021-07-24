@@ -77,6 +77,7 @@ class CommonDeviceApi {
   // TCP
 //  rpc CreateOneTCP (PortConfig) returns (PortConfig) {}
   static Future createOneTCP(PortConfig config) async {
+    config.uuid = getOneUUID();
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = CommonDeviceManagerClient(channel);
     final response = await stub.createOneTCP(config);
@@ -84,7 +85,7 @@ class CommonDeviceApi {
     channel.shutdown();
     //服务器同步
     PortInfo portInfo = PortInfo();
-    portInfo.uUID = getOneUUID();
+    portInfo.uUID = config.uuid;
     portInfo.hostUUID = config.device.uuid;
     portInfo.name = config.name;
     portInfo.description = config.description;
@@ -133,6 +134,7 @@ class CommonDeviceApi {
   // UDP
 //  rpc CreateOneUDP (PortConfig) returns (PortConfig) {}
   static Future createOneUDP(PortConfig config) async {
+    config.uuid = getOneUUID();
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = CommonDeviceManagerClient(channel);
     final response = await stub.createOneUDP(config);
@@ -140,7 +142,7 @@ class CommonDeviceApi {
     channel.shutdown();
     //服务器同步
     PortInfo portInfo = PortInfo();
-    portInfo.uUID = getOneUUID();
+    portInfo.uUID = config.uuid;
     portInfo.hostUUID = config.device.uuid;
     portInfo.name = config.name;
     portInfo.description = config.description;
@@ -189,6 +191,7 @@ class CommonDeviceApi {
   // FTP
 //  rpc CreateOneFTP (PortConfig) returns (PortConfig) {}
   static Future createOneFTP(PortConfig config) async {
+    config.uuid = getOneUUID();
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = CommonDeviceManagerClient(channel);
     final response = await stub.createOneFTP(config);
@@ -196,7 +199,7 @@ class CommonDeviceApi {
     channel.shutdown();
     //服务器同步
     PortInfo portInfo = PortInfo();
-    portInfo.uUID = getOneUUID();
+    portInfo.uUID = config.uuid;
     portInfo.hostUUID = config.device.uuid;
     portInfo.name = config.name;
     portInfo.description = config.description;

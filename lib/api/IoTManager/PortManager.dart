@@ -38,7 +38,6 @@ class PortManager {
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = PortManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
-    Empty empty = Empty();
     OperationResponse operationResponse = await stub.updatePort(portInfo);
     print('UpdatePort: ${operationResponse}');
     channel.shutdown();
@@ -50,7 +49,6 @@ class PortManager {
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = PortManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
-    Empty empty = Empty();
     OperationResponse operationResponse = await stub.delPort(portInfo);
     print('DelPort: ${operationResponse}');
     channel.shutdown();

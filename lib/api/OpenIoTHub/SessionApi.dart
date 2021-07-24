@@ -70,7 +70,8 @@ class SessionApi {
   static Future<OpenIoTHubOperationResponse> deleteRemoteGatewayConfig(SessionConfig sessionConfig) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);
-    final response = await stub.deletRemoteGatewayConfig(sessionConfig);
+    OpenIoTHubOperationResponse response = await stub.deleteRemoteGatewayConfig(sessionConfig);
+    print('deletRemoteGatewayConfig delete: ${sessionConfig.runId}');
     print('deletRemoteGatewayConfig received: ${response}');
     channel.shutdown();
     return response;

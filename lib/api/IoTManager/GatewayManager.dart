@@ -81,4 +81,18 @@ class GatewayManager {
     channel.shutdown();
     return gatewayInfo;
   }
+
+  // rpc GetGatewayJwtByGatewayUuid (StringValue) returns (StringValue) {}
+  static Future<StringValue> GetGatewayJwtByGatewayUuid(String value) async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = GatewayManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    StringValue stringValue = StringValue();
+    stringValue.value = value;
+    StringValue s = await stub.getGatewayJwtByGatewayUuid(stringValue);
+    print('GetGatewayJwtByGatewayUuid: ${s}');
+    channel.shutdown();
+    return s;
+  }
 }

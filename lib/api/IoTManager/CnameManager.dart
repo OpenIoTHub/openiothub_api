@@ -3,6 +3,7 @@ import 'package:grpc/grpc.dart';
 import 'package:iot_manager_grpc_api/pb/cnameManager.pbgrpc.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'IoTManagerChannel.dart';
 
@@ -69,5 +70,32 @@ class CnameManager {
     print('DelCnameByKey: ${operationResponse}');
     channel.shutdown();
     return operationResponse;
+  }
+
+  //本地的操作接口(结合本地和远程接口)
+  static Future<void> LoadAllCnameFromRemote() async {
+    CnameMap c = await GetAllCname();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    c.config.forEach((key, value) {
+      prefs.setString(key, value);
+    });
+  }
+
+  static Future<String> GetCname(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (await prefs.containsKey(key)){
+      return prefs.getString(key);
+    }
+    StringValue c = await GetCnameByKey(key);
+    prefs.setString(key, c.value);
+    return c.value;
+  }
+
+  static Future<void> SetCname(String key,String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+    CnameMap cnameMap = CnameMap();
+    cnameMap.config.addAll({key:value});
+    SetCnameByKey(cnameMap);
   }
 }

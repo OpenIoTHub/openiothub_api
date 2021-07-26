@@ -148,7 +148,7 @@ packages:
       name: iot_manager_grpc_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.2+28"
+    version: "0.0.2+29"
   js:
     dependency: transitive
     description:
@@ -239,7 +239,7 @@ packages:
       name: process
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.2.1"
+    version: "4.2.2"
   protobuf:
     dependency: "direct main"
     description:

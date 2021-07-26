@@ -93,8 +93,8 @@ class CommonDeviceApi {
     portInfo.domain = config.domain;
     portInfo.port = config.remotePort;
     portInfo.localPort = config.localProt;
-    portInfo.networkProtocol = "tcp";
-    portInfo.applicationProtocol = "unknown";
+    portInfo.networkProtocol = config.networkProtocol;
+    portInfo.applicationProtocol = config.applicationProtocol;
     PortManager.AddPort(portInfo);
   }
 
@@ -150,8 +150,8 @@ class CommonDeviceApi {
     portInfo.domain = config.domain;
     portInfo.port = config.remotePort;
     portInfo.localPort = config.localProt;
-    portInfo.networkProtocol = "udp";
-    portInfo.applicationProtocol = "unknown";
+    portInfo.networkProtocol = config.networkProtocol;
+    portInfo.applicationProtocol = config.applicationProtocol;
     PortManager.AddPort(portInfo);
   }
 
@@ -207,8 +207,8 @@ class CommonDeviceApi {
     portInfo.domain = config.domain;
     portInfo.port = config.remotePort;
     portInfo.localPort = config.localProt;
-    portInfo.networkProtocol = "tcp";
-    portInfo.applicationProtocol = "ftp";
+    portInfo.networkProtocol = config.networkProtocol;
+    portInfo.applicationProtocol = config.applicationProtocol;
     PortManager.AddPort(portInfo);
   }
 

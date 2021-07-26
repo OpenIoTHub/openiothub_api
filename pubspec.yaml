@@ -1,6 +1,6 @@
 name: openiothub_api
 description: openiothub_api
-version: 0.0.2+37
+version: 0.0.2+39
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -21,7 +21,7 @@ dependencies:
   openiothub_grpc_api: ^0.0.1
   server_grpc_api: ^0.0.1
   gateway_grpc_api: ^0.0.1
-  iot_manager_grpc_api: ^0.0.1
+  iot_manager_grpc_api: ^0.0.2
   fluttertoast: ^7.1.6
 
 dev_dependencies:

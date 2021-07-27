@@ -1,7 +1,5 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/pb/common.pb.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pbgrpc.dart';
+import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/api/IoTManager/IoTManagerChannel.dart';
 import 'package:openiothub_api/utils/jwt.dart';
 

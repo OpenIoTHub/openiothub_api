@@ -2,7 +2,7 @@ import 'package:grpc/grpc.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:iot_manager_grpc_api/pb/gatewayManager.pbgrpc.dart';
 import 'package:openiothub_api/api/IoTManager/IoTManagerChannel.dart';
-import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_api/utils/jwt.dart';
 
 //  网关操作
 class GatewayManager {

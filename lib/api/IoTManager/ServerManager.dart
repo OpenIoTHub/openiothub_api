@@ -1,10 +1,8 @@
-
-
 import 'package:grpc/grpc.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
 import 'package:iot_manager_grpc_api/pb/serverManager.pbgrpc.dart';
-import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_api/utils/jwt.dart';
 
 import 'IoTManagerChannel.dart';
 

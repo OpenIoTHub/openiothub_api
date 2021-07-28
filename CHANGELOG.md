@@ -1,3 +1,15 @@
+## [0.0.2+46]
+
+* 获取自己的服务器和别分享给自己的服务器
+
+## [0.0.2+45]
+
+* GenerateOneGatewayWithServerUuid
+
+## [0.0.2+44]
+
+* GenerateOneGatewayWithServerUuid
+
 ## [0.0.2+43]
 
 * update

@@ -64,4 +64,30 @@ class ServerManager {
     channel.shutdown();
     return serverInfoList;
   }
+//    获取自己作为管理员的所有服务器
+//   rpc GetAllMyServers (Empty) returns (ServerInfoList) {}
+  static Future<ServerInfoList> GetAllMyServers() async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = ServerManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    Empty empty = Empty();
+    ServerInfoList serverInfoList = await stub.getAllMyServers(empty);
+    print('GetAllServer: ${serverInfoList}');
+    channel.shutdown();
+    return serverInfoList;
+  }
+//    获取别人分享给自己的所有服务器
+//   rpc GetAllMySharedServers (Empty) returns (ServerInfoList) {}
+  static Future<ServerInfoList> GetAllMySharedServers() async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = ServerManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    Empty empty = Empty();
+    ServerInfoList serverInfoList = await stub.getAllMySharedServers(empty);
+    print('GetAllServer: ${serverInfoList}');
+    channel.shutdown();
+    return serverInfoList;
+  }
 }

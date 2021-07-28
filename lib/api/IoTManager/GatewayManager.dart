@@ -81,6 +81,21 @@ class GatewayManager {
     return gatewayInfo;
   }
 
+  // rpc GenerateOneGatewayWithServerUuid (StringValue) returns (GatewayInfo) {}
+  static Future<GatewayInfo> GenerateOneGatewayWithServerUuid(String uuid) async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = GatewayManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    StringValue stringValue = StringValue();
+    stringValue.value = uuid;
+    GatewayInfo gatewayInfo =
+    await stub.generateOneGatewayWithServerUuid(stringValue);
+    print('RegisterUserWithUserInfo: ${gatewayInfo}');
+    channel.shutdown();
+    return gatewayInfo;
+  }
+
   // rpc GetGatewayJwtByGatewayUuid (StringValue) returns (StringValue) {}
   static Future<StringValue> GetGatewayJwtByGatewayUuid(String value) async {
     String jwt = await getJWT();

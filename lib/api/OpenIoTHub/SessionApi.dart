@@ -47,7 +47,14 @@ class SessionApi {
     channel.shutdown();
     return newSessionConfig;
   }
-
+  // rpc UpdateSessionNameDescription (SessionConfig) returns (SessionConfig) {}
+  static Future<void> UpdateSessionNameDescription(SessionConfig sessionConfig) async {
+    final channel = await Channel.getOpenIoTHubChannel();
+    final stub = SessionManagerClient(channel);
+    await stub.updateSessionNameDescription(sessionConfig);
+    channel.shutdown();
+    return;
+  }
   static Future<PortList> getAllTCP(SessionConfig sessionConfig) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);

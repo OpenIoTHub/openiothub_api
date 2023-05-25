@@ -1,3 +1,7 @@
+## [1.0.0]
+
+* update
+
 ## [0.0.2+47]
 
 * 修改session的name和description

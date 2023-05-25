@@ -82,7 +82,7 @@ class CnameManager {
   static Future<String> GetCname(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (await prefs.containsKey(key)){
-      return prefs.getString(key);
+      return prefs.getString(key)!;
     }
     StringValue c = await GetCnameByKey(key);
     prefs.setString(key, c.value);

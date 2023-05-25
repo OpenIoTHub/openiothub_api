@@ -1,28 +1,28 @@
 name: openiothub_api
 description: openiothub_api
-version: 0.0.2+47
+version: 1.0.0
 homepage: https://github.com/OpenIoTHub
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ^3.0.0
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
   #  数据存储
-  shared_preferences: ^0.5.7+2
+  shared_preferences: ^2.1.1
   uuid: ^3.0.4
   #  grpc
-  grpc: ^1.0.2
+  grpc: ^3.1.0
   #  grpc协议
-  protobuf: ^1.0.1
-  openiothub_constants: ^0.0.2
-  openiothub_grpc_api: ^0.0.1
-  server_grpc_api: ^0.0.1
-  gateway_grpc_api: ^0.0.1
-  iot_manager_grpc_api: ^0.0.2+31
-  fluttertoast: ^7.1.6
+  protobuf: ^2.0.0
+  openiothub_constants: ^1.0.0
+  openiothub_grpc_api: ^1.0.0
+  server_grpc_api: ^1.0.0
+  gateway_grpc_api: ^1.0.0
+  iot_manager_grpc_api: ^1.0.0
+  fluttertoast: ^8.0.8
 
 dev_dependencies:
   flutter_test:

@@ -33,7 +33,7 @@ class UtilApi {
       return;
     }
     String allconfig =
-        await prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY);
+        await prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY)!;
     print("====loadAllConfig:$allconfig");
     if (allconfig != null) {
       setAllConfig(allconfig);
@@ -84,7 +84,7 @@ class UtilApi {
   }
 
   //获取本地的指定条件的mdns列表
-  static Future<void> setAllConfig(String config) async {
+  static Future<OpenIoTHubEmpty> setAllConfig(String config) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
     OpenIoTHubStringValue sv = OpenIoTHubStringValue();

@@ -26,7 +26,7 @@ class ZipLocalDevice {
     await socket.send(message.codeUnits, DESTINATION_ADDRESS, 10182);
     await Future.delayed(Duration(seconds: 1));
     await socket.send(message.codeUnits, DESTINATION_ADDRESS, 10182);
-    await socket.close();
+    socket.close();
   }
 
   static ZipLocalDevice fromMap(Map<String, dynamic> device) {
@@ -56,7 +56,7 @@ Future<List<ZipLocalDevice>> findZipDevicesFromLocal(int timeOut) async {
     socket.send(
         '{"cmd":"device report"}'.codeUnits, DESTINATION_ADDRESS, 10182);
     socket.listen((RawSocketEvent e) {
-      Datagram d = socket.receive();
+      Datagram? d = socket.receive();
       if (d == null) {
         return;
       }
@@ -90,19 +90,19 @@ Future<List<ZipLocalDevice>> findZipDevicesFromLocal(int timeOut) async {
   return zipLocalDeviceList;
 }
 
-main() async {
-  List<ZipLocalDevice> zipLocalDeviceList = await findZipDevicesFromLocal(3);
-  print(zipLocalDeviceList.length);
-  if (zipLocalDeviceList != null) {
-    await zipLocalDeviceList.forEach((ZipLocalDevice zipLocalDevice) {
-      print("main:$zipLocalDevice");
-      // zipLocalDevice.send('{"mac":"${zipLocalDevice.mac}","setting":{"name":"${zipLocalDevice.mac}"}}');
-      // zipLocalDevice.send('{"mac":"${zipLocalDevice.mac}","setting":{"mqtt_uri":null}}');
-      MqttInfo mqttInfo = MqttInfo();
-      mqttInfo.mqttServerHost="192.168.123.118";
-      mqttInfo.mqttServerPort=1883;
-      zipLocalDevice.configMqttServer(mqttInfo);
-    });
-  }
-  await Future.delayed(Duration(seconds: 1));
-}
+// main() async {
+//   List<ZipLocalDevice> zipLocalDeviceList = await findZipDevicesFromLocal(3);
+//   print(zipLocalDeviceList.length);
+//   if (zipLocalDeviceList != null) {
+//     await zipLocalDeviceList.forEach((ZipLocalDevice zipLocalDevice) {
+//       print("main:$zipLocalDevice");
+//       // zipLocalDevice.send('{"mac":"${zipLocalDevice.mac}","setting":{"name":"${zipLocalDevice.mac}"}}');
+//       // zipLocalDevice.send('{"mac":"${zipLocalDevice.mac}","setting":{"mqtt_uri":null}}');
+//       MqttInfo mqttInfo = MqttInfo();
+//       mqttInfo.mqttServerHost="192.168.123.118";
+//       mqttInfo.mqttServerPort=1883;
+//       zipLocalDevice.configMqttServer(mqttInfo);
+//     });
+//   }
+//   await Future.delayed(Duration(seconds: 1));
+// }

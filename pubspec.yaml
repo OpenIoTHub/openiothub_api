@@ -1,7 +1,8 @@
 name: openiothub_api
 description: openiothub_api
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/OpenIoTHub
+repository: https://github.com/OpenIoTHub/openiothub_api
 
 environment:
   sdk: ^3.0.0

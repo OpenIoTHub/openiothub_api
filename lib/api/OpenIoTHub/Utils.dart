@@ -32,10 +32,10 @@ class UtilApi {
     if (!await prefs.containsKey(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY)) {
       return;
     }
-    String allconfig =
-        await prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY)!;
-    print("====loadAllConfig:$allconfig");
+    String? allconfig =
+      prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY);
     if (allconfig != null) {
+      print("====loadAllConfig:$allconfig");
       setAllConfig(allconfig);
     }
   }

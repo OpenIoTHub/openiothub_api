@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/configManager.pbgrpc.dart';
 
 import 'IoTManagerChannel.dart';
 
@@ -19,6 +20,7 @@ class ConfigManager {
     channel.shutdown();
     return stringValue;
   }
+
   // rpc GetAllUserConfig (Empty) returns (UserConfigMap) {}
   static Future<UserConfigMap> GetAllUserConfig() async {
     String jwt = await getJWT();
@@ -31,30 +33,37 @@ class ConfigManager {
     channel.shutdown();
     return configMap;
   }
+
   //    创建或者更新
   // rpc SetUserConfigByKey (UserConfigMap) returns (OperationResponse) {}
-  static Future<OperationResponse> SetUserConfigByKey(UserConfigMap userConfigMap) async {
+  static Future<OperationResponse> SetUserConfigByKey(
+      UserConfigMap userConfigMap) async {
     String jwt = await getJWT();
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = ConfigManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
-    OperationResponse operationResponse = await stub.setUserConfigByKey(userConfigMap);
+    OperationResponse operationResponse =
+        await stub.setUserConfigByKey(userConfigMap);
     print('SetUserConfigByKey: ${operationResponse}');
     channel.shutdown();
     return operationResponse;
   }
+
   //    删除
   // rpc DelAllUserConfig (UserConfigMap) returns (OperationResponse) {}
-  static Future<OperationResponse> DelAllUserConfig(UserConfigMap userConfigMap) async {
+  static Future<OperationResponse> DelAllUserConfig(
+      UserConfigMap userConfigMap) async {
     String jwt = await getJWT();
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = ConfigManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
-    OperationResponse operationResponse = await stub.delAllUserConfig(userConfigMap);
+    OperationResponse operationResponse =
+        await stub.delAllUserConfig(userConfigMap);
     print('DelAllUserConfig: ${operationResponse}');
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc DelUserConfigByKey (StringValue) returns (OperationResponse) {}
   static Future<OperationResponse> DelUserConfigByKey(String value) async {
     String jwt = await getJWT();
@@ -63,7 +72,8 @@ class ConfigManager {
         options: CallOptions(metadata: {'jwt': jwt}));
     StringValue stringValue = StringValue();
     stringValue.value = value;
-    OperationResponse operationResponse = await stub.delUserConfigByKey(stringValue);
+    OperationResponse operationResponse =
+        await stub.delUserConfigByKey(stringValue);
     print('DelUserConfigByKey: ${operationResponse}');
     channel.shutdown();
     return operationResponse;

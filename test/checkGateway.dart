@@ -1,7 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:gateway_grpc_api/pb/service.pb.dart';
-import 'package:iot_manager_grpc_api/pb/common.pb.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/gateway/gateway.pb.dart';
 
 import 'package:openiothub_api/openiothub_api.dart';
 

@@ -1,7 +1,8 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/api/IoTManager/IoTManagerChannel.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/gatewayManager.pbgrpc.dart';
 
 //  网关操作
 class GatewayManager {
@@ -82,7 +83,8 @@ class GatewayManager {
   }
 
   // rpc GenerateOneGatewayWithServerUuid (StringValue) returns (GatewayInfo) {}
-  static Future<GatewayInfo> GenerateOneGatewayWithServerUuid(String uuid) async {
+  static Future<GatewayInfo> GenerateOneGatewayWithServerUuid(
+      String uuid) async {
     String jwt = await getJWT();
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = GatewayManagerClient(channel,
@@ -90,7 +92,7 @@ class GatewayManager {
     StringValue stringValue = StringValue();
     stringValue.value = uuid;
     GatewayInfo gatewayInfo =
-    await stub.generateOneGatewayWithServerUuid(stringValue);
+        await stub.generateOneGatewayWithServerUuid(stringValue);
     print('RegisterUserWithUserInfo: ${gatewayInfo}');
     channel.shutdown();
     return gatewayInfo;

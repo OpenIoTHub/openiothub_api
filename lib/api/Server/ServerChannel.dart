@@ -1,7 +1,7 @@
+import 'package:grpc/grpc.dart';
 import 'package:openiothub_api/api/OpenIoTHub/SessionApi.dart';
 import 'package:openiothub_api/api/OpenIoTHub/Utils.dart';
-import 'package:grpc/grpc.dart';
-import 'package:openiothub_grpc_api/pb/service.pb.dart';
+import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
 
 class Channel {
   static Future<ClientChannel> getServerChannel(String runId) async {

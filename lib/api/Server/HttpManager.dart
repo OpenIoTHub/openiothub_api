@@ -1,11 +1,10 @@
-import 'package:openiothub_api/api/OpenIoTHub/SessionApi.dart';
-import 'package:openiothub_api/api/OpenIoTHub/Utils.dart';
-import 'package:openiothub_grpc_api/pb/service.pb.dart' as openiothub;
-import 'package:openiothub_grpc_api/pb/service.pb.dart';
-import 'package:server_grpc_api/pb/service.pb.dart';
-import 'package:server_grpc_api/pb/service.pbgrpc.dart' as server;
 import 'package:grpc/grpc.dart';
+import 'package:openiothub_api/api/OpenIoTHub/SessionApi.dart';
 import 'package:openiothub_api/api/Server/ServerChannel.dart';
+import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart' as mobile;
+import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
+import 'package:openiothub_grpc_api/proto/server/server.pb.dart';
+import 'package:openiothub_grpc_api/proto/server/server.pbgrpc.dart' as server;
 
 class HttpManager {
 //  rpc CreateOneHTTP (HTTPConfig) returns (HTTPConfig) {}
@@ -48,7 +47,7 @@ class HttpManager {
   }
 
 //  rpc GetAllHTTP (Empty) returns (HTTPList) {}
-  static Future<HTTPList> GetAllHTTP(openiothub.Device device) async {
+  static Future<HTTPList> GetAllHTTP(mobile.Device device) async {
     final channel = await Channel.getServerChannel(device.runId);
     SessionConfig sessionConfig = await SessionApi.getOneSession(device.runId);
     final stub = server.HttpManagerClient(channel,

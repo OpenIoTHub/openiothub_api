@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/hostManager.pbgrpc.dart';
 
 import 'IoTManagerChannel.dart';
 
@@ -17,6 +18,7 @@ class HostManager {
     channel.shutdown();
     return hostInfoList;
   }
+
   // rpc AddHost (HostInfo) returns (OperationResponse) {}
   static Future<OperationResponse> AddHost(HostInfo hostInfo) async {
     String jwt = await getJWT();
@@ -28,6 +30,7 @@ class HostManager {
     channel.shutdown();
     return hostInfoList;
   }
+
   // rpc UpdateHost (HostInfo) returns (OperationResponse) {}
   static Future<OperationResponse> UpdateHost(HostInfo hostInfo) async {
     String jwt = await getJWT();
@@ -39,6 +42,7 @@ class HostManager {
     channel.shutdown();
     return hostInfoList;
   }
+
   // rpc DelHost (HostInfo) returns (OperationResponse) {}
   static Future<OperationResponse> DelHost(HostInfo hostInfo) async {
     String jwt = await getJWT();
@@ -50,6 +54,7 @@ class HostManager {
     channel.shutdown();
     return hostInfoList;
   }
+
   // rpc SetDeviceMac (HostInfo) returns (OperationResponse) {}
   static Future<OperationResponse> SetDeviceMac(HostInfo hostInfo) async {
     String jwt = await getJWT();

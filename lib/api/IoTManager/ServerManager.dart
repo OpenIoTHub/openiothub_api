@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/serverManager.pbgrpc.dart';
 
 import 'IoTManagerChannel.dart';
 
@@ -17,6 +18,7 @@ class ServerManager {
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc DelServer (ServerInfo) returns (OperationResponse) {}
   static Future<OperationResponse> DelServer(ServerInfo serverInfo) async {
     String jwt = await getJWT();
@@ -28,6 +30,7 @@ class ServerManager {
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc UpdateServer (ServerInfo) returns (OperationResponse) {}
   static Future<OperationResponse> UpdateServer(ServerInfo serverInfo) async {
     String jwt = await getJWT();
@@ -39,6 +42,7 @@ class ServerManager {
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc QueryServer (StringValue) returns (ServerInfoList) {}
   static Future<ServerInfoList> QueryServer(String value) async {
     String jwt = await getJWT();
@@ -52,6 +56,7 @@ class ServerManager {
     channel.shutdown();
     return serverInfoList;
   }
+
   // rpc GetAllServer (Empty) returns (ServerInfoList) {}
   static Future<ServerInfoList> GetAllServer() async {
     String jwt = await getJWT();
@@ -64,6 +69,7 @@ class ServerManager {
     channel.shutdown();
     return serverInfoList;
   }
+
 //    获取自己作为管理员的所有服务器
 //   rpc GetAllMyServers (Empty) returns (ServerInfoList) {}
   static Future<ServerInfoList> GetAllMyServers() async {
@@ -77,6 +83,7 @@ class ServerManager {
     channel.shutdown();
     return serverInfoList;
   }
+
 //    获取别人分享给自己的所有服务器
 //   rpc GetAllMySharedServers (Empty) returns (ServerInfoList) {}
   static Future<ServerInfoList> GetAllMySharedServers() async {

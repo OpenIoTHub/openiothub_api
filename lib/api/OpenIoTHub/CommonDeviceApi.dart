@@ -1,12 +1,8 @@
-import 'package:iot_manager_grpc_api/pb/hostManager.pb.dart';
-import 'package:iot_manager_grpc_api/pb/portManager.pb.dart';
-import 'package:openiothub_api/openiothub_api.dart';
-import 'package:openiothub_grpc_api/pb/service.pb.dart';
-import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
-
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
-
-import 'Utils.dart';
+import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_grpc_api/proto/manager/hostManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/portManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 
 class CommonDeviceApi {
   //设置设备的物理地址

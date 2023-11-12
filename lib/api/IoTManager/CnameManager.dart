@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/cnameManager.pbgrpc.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'IoTManagerChannel.dart';
@@ -20,6 +21,7 @@ class CnameManager {
     channel.shutdown();
     return stringValue;
   }
+
   // rpc GetAllCname (Empty) returns (CnameMap) {}
   static Future<CnameMap> GetAllCname() async {
     String jwt = await getJWT();
@@ -32,6 +34,7 @@ class CnameManager {
     channel.shutdown();
     return cnameMap;
   }
+
   //    创建或者更新
   // rpc SetCnameByKey (CnameMap) returns (OperationResponse) {}
   static Future<OperationResponse> SetCnameByKey(CnameMap cnameMap) async {
@@ -44,6 +47,7 @@ class CnameManager {
     channel.shutdown();
     return operationResponse;
   }
+
   //    删除
   // rpc DelAllCname (CnameMap) returns (OperationResponse) {}
   static Future<OperationResponse> DelAllCname(CnameMap cnameMap) async {
@@ -56,6 +60,7 @@ class CnameManager {
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc DelCnameByKey (StringValue) returns (OperationResponse) {}
   static Future<OperationResponse> DelCnameByKey(String value) async {
     String jwt = await getJWT();
@@ -81,7 +86,7 @@ class CnameManager {
 
   static Future<String> GetCname(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (await prefs.containsKey(key)){
+    if (await prefs.containsKey(key)) {
       return prefs.getString(key)!;
     }
     StringValue c = await GetCnameByKey(key);
@@ -89,11 +94,11 @@ class CnameManager {
     return c.value;
   }
 
-  static Future<void> SetCname(String key,String value) async {
+  static Future<void> SetCname(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
     CnameMap cnameMap = CnameMap();
-    cnameMap.config.addAll({key:value});
+    cnameMap.config.addAll({key: value});
     SetCnameByKey(cnameMap);
   }
 }

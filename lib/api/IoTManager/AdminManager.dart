@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/adminManager.pbgrpc.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 
 import 'IoTManagerChannel.dart';
 
@@ -18,6 +19,7 @@ class AdminManager {
     channel.shutdown();
     return userInfoList;
   }
+
 //禁用一个用户(不可以禁用管理员)
 // rpc BanUser (UserInfo) returns (OperationResponse) {}
   static Future<OperationResponse> BanUser(UserInfo userInfo) async {

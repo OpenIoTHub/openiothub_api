@@ -1,21 +1,21 @@
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
 import 'package:openiothub_api/openiothub_api.dart';
-import 'package:openiothub_grpc_api/pb/service.pb.dart';
-import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
-import 'package:grpc/grpc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
+import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UtilApi {
   static Future<OpenIoTHubOperationResponse> SyncConfigWithToken() async {
     String jwt = await getJWT();
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    IoTManagerServerAndToken ioTManagerServerAndToken = IoTManagerServerAndToken();
+    IoTManagerServerAndToken ioTManagerServerAndToken =
+        IoTManagerServerAndToken();
     ioTManagerServerAndToken.host = Config.iotManagergRpcIp;
     ioTManagerServerAndToken.port = Config.iotManagerRpcPort;
     ioTManagerServerAndToken.token = jwt;
-    OpenIoTHubOperationResponse response = await stub.syncConfigWithToken(ioTManagerServerAndToken);
+    OpenIoTHubOperationResponse response =
+        await stub.syncConfigWithToken(ioTManagerServerAndToken);
     channel.shutdown();
     return response;
   }
@@ -24,16 +24,18 @@ class UtilApi {
     final allconfig = await getAllConfig();
     print("====saveAllConfig:$allconfig");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY, allconfig);
+    await prefs.setString(
+        SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY, allconfig);
   }
 
   static Future<void> loadAllConfig() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (!await prefs.containsKey(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY)) {
+    if (!await prefs
+        .containsKey(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY)) {
       return;
     }
     String? allconfig =
-      prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY);
+        prefs.getString(SharedPreferencesKey.OPENIOTHUB_GO_AAR_CONFIG_KEY);
     if (allconfig != null) {
       print("====loadAllConfig:$allconfig");
       setAllConfig(allconfig);

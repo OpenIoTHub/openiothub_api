@@ -1,7 +1,5 @@
 import 'package:openiothub_api/api/GateWay/GateWayChannel.dart';
-import 'package:gateway_grpc_api/pb/service.pb.dart';
-import 'package:gateway_grpc_api/pb/service.pbgrpc.dart';
-import 'package:grpc/grpc.dart';
+import 'package:openiothub_grpc_api/proto/gateway/gateway.pbgrpc.dart';
 
 class GatewayLoginManager {
   static Future<LoginResponse> CheckGatewayLoginStatus(
@@ -21,8 +19,7 @@ class GatewayLoginManager {
     final stub = GatewayLoginManagerClient(channel);
     Token token = Token();
     token.value = tokenValue;
-    LoginResponse loginResponse =
-        await stub.loginServerByToken(token);
+    LoginResponse loginResponse = await stub.loginServerByToken(token);
     print('LoginServerByServerInfo: ${loginResponse}');
     channel.shutdown();
     return loginResponse;

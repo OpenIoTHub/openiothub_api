@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
-import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/portManager.pbgrpc.dart';
 
 import 'IoTManagerChannel.dart';
 
@@ -17,6 +18,7 @@ class PortManager {
     channel.shutdown();
     return portInfoList;
   }
+
   // rpc AddPort (PortInfo) returns (OperationResponse) {}
   static Future<OperationResponse> AddPort(PortInfo portInfo) async {
     String jwt = await getJWT();
@@ -28,6 +30,7 @@ class PortManager {
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc UpdatePort (PortInfo) returns (OperationResponse) {}
   static Future<OperationResponse> UpdatePort(PortInfo portInfo) async {
     String jwt = await getJWT();
@@ -39,6 +42,7 @@ class PortManager {
     channel.shutdown();
     return operationResponse;
   }
+
   // rpc DelPort (PortInfo) returns (OperationResponse) {}
   static Future<OperationResponse> DelPort(PortInfo portInfo) async {
     String jwt = await getJWT();

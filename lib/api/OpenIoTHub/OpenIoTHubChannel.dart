@@ -1,5 +1,5 @@
-import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:grpc/grpc.dart';
+import 'package:openiothub_constants/openiothub_constants.dart';
 
 class Channel {
   static Future<ClientChannel> getOpenIoTHubChannel() async {

@@ -1,8 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:iot_manager_grpc_api/pb/common.pb.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
-
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 
 void main() async {
   LoginInfo loginInfo = LoginInfo();

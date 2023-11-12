@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:iot_manager_grpc_api/pb/mqttDeviceManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/mqttDeviceManager.pb.dart';
 
 class ZipLocalDevice {
   String name;
@@ -13,13 +13,15 @@ class ZipLocalDevice {
   ZipLocalDevice(this.name, this.ip, this.mac, this.type, this.type_name);
 
   Future<void> configMqttServer(MqttInfo mqttInfo) async {
-    String config = '{"mac":"${mac}","setting":{"mqtt_uri":"${mqttInfo.mqttServerHost}","mqtt_port":${mqttInfo.mqttServerPort},"mqtt_user":"${mqttInfo.mqttClientUserName}","mqtt_password":"${mqttInfo.mqttClientUserPassword}"}}';
+    String config =
+        '{"mac":"${mac}","setting":{"mqtt_uri":"${mqttInfo.mqttServerHost}","mqtt_port":${mqttInfo.mqttServerPort},"mqtt_user":"${mqttInfo.mqttClientUserName}","mqtt_password":"${mqttInfo.mqttClientUserPassword}"}}';
     await send(config);
   }
 
   Future<void> send(String message) async {
     var DESTINATION_ADDRESS = InternetAddress("255.255.255.255");
-    RawDatagramSocket socket = await RawDatagramSocket.bind(InternetAddress.anyIPv4, 10181);
+    RawDatagramSocket socket =
+        await RawDatagramSocket.bind(InternetAddress.anyIPv4, 10181);
     socket.broadcastEnabled = true;
     await socket.send(message.codeUnits, DESTINATION_ADDRESS, 10182);
     await Future.delayed(Duration(seconds: 1));

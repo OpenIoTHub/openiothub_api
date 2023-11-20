@@ -1,3 +1,7 @@
+## [1.0.2+1]
+
+* uuid lib
+
 ## [1.0.2]
 
 * upgrade lib

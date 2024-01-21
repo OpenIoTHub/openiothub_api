@@ -8,6 +8,7 @@ export './api/IoTManager/GatewayManager.dart';
 export './api/IoTManager/HostManager.dart';
 export './api/IoTManager/MqttDeviceManager.dart';
 export './api/IoTManager/PortManager.dart';
+export './api/IoTManager/PublicApi.dart';
 export './api/IoTManager/ServerManager.dart';
 export './api/IoTManager/UserManager.dart';
 export './api/OpenIoTHub/CommonDeviceApi.dart';

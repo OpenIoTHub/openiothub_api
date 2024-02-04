@@ -1,5 +1,6 @@
 import 'package:grpc/grpc.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/adminManager.pbgrpc.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 

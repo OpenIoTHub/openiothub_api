@@ -1,4 +1,5 @@
 import 'package:openiothub_api/api/GateWay/GateWayChannel.dart';
+import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
 import 'package:openiothub_grpc_api/proto/gateway/gateway.pbgrpc.dart';
 
 class GatewayLoginManager {

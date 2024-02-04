@@ -1,5 +1,6 @@
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/hostManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/portManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
@@ -64,7 +65,7 @@ class CommonDeviceApi {
   static Future<DeviceList> getAllDevice() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = CommonDeviceManagerClient(channel);
-    final response = await stub.getAllDevice(OpenIoTHubEmpty());
+    final response = await stub.getAllDevice(Empty());
     print('Greeter client received: ${response}');
     channel.shutdown();
     return response;

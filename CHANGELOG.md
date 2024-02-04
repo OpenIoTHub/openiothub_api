@@ -1,3 +1,7 @@
+## [1.0.4]
+
+* google protobuf Empty
+
 ## [1.0.3+1]
 
 * upgrade

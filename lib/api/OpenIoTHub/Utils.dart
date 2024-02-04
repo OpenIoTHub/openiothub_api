@@ -1,6 +1,8 @@
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
+import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
+import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,7 +48,7 @@ class UtilApi {
   static Future<MDNSServiceList> getAllmDNSServiceList() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    final response = await stub.getAllmDNSServiceList(OpenIoTHubEmpty());
+    final response = await stub.getAllmDNSServiceList(Empty());
     channel.shutdown();
     print("===getAllmDNSServiceList：${response.mDNSServices}");
     return response;
@@ -56,7 +58,7 @@ class UtilApi {
   static Future<MDNSServiceList> getOnemDNSServiceList(String type) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    OpenIoTHubStringValue sv = OpenIoTHubStringValue();
+    StringValue sv = StringValue();
     sv.value = type;
     final response = await stub.getmDNSServiceListByType(sv);
     channel.shutdown();
@@ -68,7 +70,7 @@ class UtilApi {
   static Future<String> convertOctonaryUtf8(String oldString) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    var openIoTHubStringValue = OpenIoTHubStringValue();
+    var openIoTHubStringValue = StringValue();
     openIoTHubStringValue.value = oldString;
     final response = await stub.convertOctonaryUtf8(openIoTHubStringValue);
     channel.shutdown();
@@ -79,17 +81,17 @@ class UtilApi {
   static Future<String> getAllConfig() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    OpenIoTHubEmpty empty = OpenIoTHubEmpty();
+    Empty empty = Empty();
     final response = await stub.getAllConfig(empty);
     channel.shutdown();
     return response.value;
   }
 
   //获取本地的指定条件的mdns列表
-  static Future<OpenIoTHubEmpty> setAllConfig(String config) async {
+  static Future<Empty> setAllConfig(String config) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    OpenIoTHubStringValue sv = OpenIoTHubStringValue();
+    StringValue sv = StringValue();
     sv.value = config;
     final response = await stub.loadAllConfig(sv);
     channel.shutdown();
@@ -100,7 +102,7 @@ class UtilApi {
   static Future<TokenModel> getTokenModel(String tokenStr) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = UtilsClient(channel);
-    OpenIoTHubStringValue sv = OpenIoTHubStringValue();
+    StringValue sv = StringValue();
     sv.value = tokenStr;
     final response = await stub.getTokenModel(sv);
     channel.shutdown();

@@ -1,6 +1,7 @@
 import 'package:grpc/grpc.dart';
 import 'package:openiothub_api/api/IoTManager/IoTManagerChannel.dart';
 import 'package:openiothub_api/utils/jwt.dart';
+import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/mqttDeviceManager.pbgrpc.dart';
 

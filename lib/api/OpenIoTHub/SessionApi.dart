@@ -1,5 +1,6 @@
 import 'package:openiothub_api/api/IoTManager/GatewayManager.dart';
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
+import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/gatewayManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 
@@ -28,7 +29,7 @@ class SessionApi {
   static Future<SessionList> getAllSession() async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);
-    final response = await stub.getAllSession(new OpenIoTHubEmpty());
+    final response = await stub.getAllSession(Empty());
     print('getAllSession received: ${response.sessionConfigs}');
     channel.shutdown();
     return response;
@@ -63,7 +64,7 @@ class SessionApi {
     return response;
   }
 
-  static Future<OpenIoTHubEmpty> refreshmDNSServices(
+  static Future<Empty> refreshmDNSServices(
       SessionConfig sessionConfig) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);

@@ -220,10 +220,10 @@ packages:
     dependency: "direct main"
     description:
       name: openiothub_grpc_api
-      sha256: f79d392e35e0ee81df2b81777c03e45fd26f22075e417ff52a0d542e53f87f60
+      sha256: "40ffb9d6517f0d6d4ab3c96e65ae3e79fb8594ab58d8137fc5987db82a15cf5e"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.4"
   path:
     dependency: transitive
     description:

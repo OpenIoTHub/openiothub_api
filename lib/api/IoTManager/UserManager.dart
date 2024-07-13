@@ -187,4 +187,17 @@ class UserManager {
     channel.shutdown();
     return stringValue;
   }
+
+  // rpc DeleteMyAccount (LoginInfo) returns (OperationResponse) {}
+  static Future<OperationResponse> DeleteMyAccount(LoginInfo loginInfo) async {
+    String jwt = await getJWT();
+    final channel = await Channel.getDefaultIoTManagerChannel();
+    final stub = UserManagerClient(channel,
+        options: CallOptions(metadata: {'jwt': jwt}));
+    OperationResponse operationResponse =
+    await stub.deleteMyAccount(loginInfo);
+    print('OperationResponse: ${operationResponse}');
+    channel.shutdown();
+    return operationResponse;
+  }
 }

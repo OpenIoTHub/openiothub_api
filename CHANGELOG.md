@@ -1,3 +1,7 @@
+## [1.0.4+3]
+
+* Add DeleteMyAccount
+
 ## [1.0.4+2]
 
 * GetOpenIoTHubJwtByGatewayUuid

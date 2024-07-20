@@ -1,3 +1,4 @@
+import 'package:grpc/grpc.dart';
 import 'package:openiothub_api/api/OpenIoTHub/OpenIoTHubChannel.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
@@ -7,6 +8,14 @@ import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UtilApi {
+  static Future<void> Ping() async {
+    final channel = await Channel.getOpenIoTHubChannel();
+    final stub = UtilsClient(channel, options: CallOptions(timeout: Duration(seconds: 3)));
+    Empty empty = Empty();
+    await stub.ping(empty);
+    channel.shutdown();
+  }
+
   static Future<OpenIoTHubOperationResponse> SyncConfigWithToken() async {
     String jwt = await getJWT();
     final channel = await Channel.getOpenIoTHubChannel();
@@ -18,6 +27,17 @@ class UtilApi {
     ioTManagerServerAndToken.token = jwt;
     OpenIoTHubOperationResponse response =
         await stub.syncConfigWithToken(ioTManagerServerAndToken);
+    channel.shutdown();
+    return response;
+  }
+
+  static Future<OpenIoTHubOperationResponse> SyncConfigWithJsonConfig(String config) async {
+    final channel = await Channel.getOpenIoTHubChannel();
+    final stub = UtilsClient(channel);
+    StringValue stringValue = StringValue();
+    stringValue.value = config;
+    OpenIoTHubOperationResponse response =
+    await stub.syncConfigWithJsonConfig(stringValue);
     channel.shutdown();
     return response;
   }

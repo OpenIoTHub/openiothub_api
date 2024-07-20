@@ -1,3 +1,7 @@
+## [1.0.5]
+
+* new api:Ping and SyncConfigWithJsonConfig
+
 ## [1.0.4+4]
 
 * tls grpc

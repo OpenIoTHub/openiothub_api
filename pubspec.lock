@@ -212,10 +212,10 @@ packages:
     dependency: "direct main"
     description:
       name: openiothub_grpc_api
-      sha256: a3309697bd31b807645ad3edc2990ca6eb6a20b413ad53de70fa6c2b3a757444
+      sha256: "12af548d51f6e10905d11ae07e52f4803aa86032b0a1e3af6bec2e69fc278488"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.6"
+    version: "1.1.8"
   path:
     dependency: transitive
     description:

@@ -1,3 +1,7 @@
+## [1.0.4+4]
+
+* tls grpc
+
 ## [1.0.4+3]
 
 * Add DeleteMyAccount

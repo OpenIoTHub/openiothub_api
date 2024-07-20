@@ -64,8 +64,7 @@ class SessionApi {
     return response;
   }
 
-  static Future<Empty> refreshmDNSServices(
-      SessionConfig sessionConfig) async {
+  static Future<Empty> refreshmDNSServices(SessionConfig sessionConfig) async {
     final channel = await Channel.getOpenIoTHubChannel();
     final stub = SessionManagerClient(channel);
     final response = await stub.refreshmDNSProxyList(sessionConfig);

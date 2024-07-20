@@ -14,7 +14,6 @@ class ServerManager {
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = ServerManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
-    Empty empty = Empty();
     OperationResponse operationResponse = await stub.addServer(serverInfo);
     print('AddServer: ${operationResponse}');
     channel.shutdown();

@@ -1,5 +1,4 @@
 import 'package:openiothub_grpc_api/google/protobuf/empty.pb.dart';
-import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/publicApi.pbgrpc.dart';
 
 import 'IoTManagerChannel.dart';

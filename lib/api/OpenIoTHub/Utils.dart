@@ -13,8 +13,8 @@ class UtilApi {
     final stub = UtilsClient(channel);
     IoTManagerServerAndToken ioTManagerServerAndToken =
         IoTManagerServerAndToken();
-    ioTManagerServerAndToken.host = Config.iotManagergRpcIp;
-    ioTManagerServerAndToken.port = Config.iotManagerRpcPort;
+    ioTManagerServerAndToken.host = Config.iotManagerGrpcIp;
+    ioTManagerServerAndToken.port = Config.iotManagerGrpcPort;
     ioTManagerServerAndToken.token = jwt;
     OpenIoTHubOperationResponse response =
         await stub.syncConfigWithToken(ioTManagerServerAndToken);

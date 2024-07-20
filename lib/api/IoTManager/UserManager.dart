@@ -194,8 +194,7 @@ class UserManager {
     final channel = await Channel.getDefaultIoTManagerChannel();
     final stub = UserManagerClient(channel,
         options: CallOptions(metadata: {'jwt': jwt}));
-    OperationResponse operationResponse =
-    await stub.deleteMyAccount(loginInfo);
+    OperationResponse operationResponse = await stub.deleteMyAccount(loginInfo);
     print('OperationResponse: ${operationResponse}');
     channel.shutdown();
     return operationResponse;

@@ -1,3 +1,7 @@
+## [1.0.5+1]
+
+* upgrade flutter
+
 ## [1.0.5]
 
 * new api:Ping and SyncConfigWithJsonConfig

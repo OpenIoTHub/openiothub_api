@@ -1,12 +1,12 @@
 name: openiothub_api
 description: openiothub_api
-version: 1.0.5
+version: 1.0.5+1
 homepage: https://github.com/OpenIoTHub
 repository: https://github.com/OpenIoTHub/openiothub_api
 
 environment:
-  sdk: ^3.0.0
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:

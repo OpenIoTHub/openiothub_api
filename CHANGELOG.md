@@ -1,3 +1,7 @@
+## [1.0.5+3]
+
+* flutter pub upgrade
+
 ## [1.0.5+2]
 
 * flutter pub upgrade

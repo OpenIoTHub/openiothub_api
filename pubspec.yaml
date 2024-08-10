@@ -1,6 +1,6 @@
 name: openiothub_api
 description: openiothub_api
-version: 1.0.5+2
+version: 1.0.5+3
 homepage: https://github.com/OpenIoTHub
 repository: https://github.com/OpenIoTHub/openiothub_api
 
@@ -15,7 +15,7 @@ dependencies:
   shared_preferences: ^2.1.1
   uuid: ^4.4.2
   #  grpc
-  grpc: ^3.1.0
+  grpc: ^4.0.0
   #  grpc协议
   protobuf: ^3.1.0
   openiothub_constants: ^1.0.0

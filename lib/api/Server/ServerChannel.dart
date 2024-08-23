@@ -7,10 +7,12 @@ class Channel {
   static Future<ClientChannel> getServerChannel(String runId) async {
     SessionConfig sessionConfig = await SessionApi.getOneSession(runId);
     TokenModel tokenModel = await UtilApi.getTokenModel(sessionConfig.token);
-    final channel = ClientChannel(tokenModel.host,
-        port: tokenModel.grpcPort,
-        options: const ChannelOptions(
-            credentials: const ChannelCredentials.insecure()));
+    final channel = ClientChannel(
+      tokenModel.host,
+      port: tokenModel.grpcPort,
+      // options: const ChannelOptions(
+      //     credentials: const ChannelCredentials.insecure())
+    );
     return channel;
   }
 }

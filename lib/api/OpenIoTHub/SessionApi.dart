@@ -73,6 +73,15 @@ class SessionApi {
     return response;
   }
 
+  static Future<Empty> createTcpProxyList(PortList portList) async {
+    final channel = await Channel.getOpenIoTHubChannel();
+    final stub = SessionManagerClient(channel);
+    final response = await stub.createTcpProxyList(portList);
+    print('createTcpProxyList received: ${response}');
+    channel.shutdown();
+    return response;
+  }
+
   // 通知这个网关删除配置文件中的token
   // rpc DeletRemoteGatewayConfig (SessionConfig) returns (OpenIoTHubOperationResponse) {}
   static Future<OpenIoTHubOperationResponse> deleteRemoteGatewayConfig(

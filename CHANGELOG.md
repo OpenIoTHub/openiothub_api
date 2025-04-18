@@ -1,3 +1,7 @@
+## [1.0.5+7]
+
+* flutter pub upgrade --major-versions
+
 ## [1.0.5+6]
 
 * mobile add createTcpProxyList

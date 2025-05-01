@@ -23,7 +23,7 @@ class SessionApi {
     //同步删除服务器上的配置
     GatewayInfo gatewayInfo = GatewayInfo();
     gatewayInfo.gatewayUuid = config.runId;
-    GatewayManager.DelGateway(gatewayInfo);
+    await GatewayManager.DelGateway(gatewayInfo);
   }
 
   static Future<SessionList> getAllSession() async {

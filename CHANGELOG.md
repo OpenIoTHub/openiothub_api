@@ -1,3 +1,7 @@
+## [1.0.5+8]
+
+* await
+
 ## [1.0.5+7]
 
 * flutter pub upgrade --major-versions

@@ -17,7 +17,7 @@ class CommonDeviceApi {
     HostInfo hostInfo = HostInfo();
     hostInfo.uUID = device.uuid;
     hostInfo.mac = device.mac;
-    HostManager.SetDeviceMac(hostInfo);
+    await HostManager.SetDeviceMac(hostInfo);
   }
 
 //  设备网络唤醒
@@ -45,7 +45,7 @@ class CommonDeviceApi {
     hostInfo.gatewayUUID = device.runId;
     hostInfo.hostAddr = device.addr;
     hostInfo.mac = device.mac;
-    HostManager.AddHost(hostInfo);
+    await HostManager.AddHost(hostInfo);
   }
 
 //  rpc DelDevice (Device) returns (Empty) {}
@@ -58,7 +58,7 @@ class CommonDeviceApi {
     //服务器同步
     HostInfo hostInfo = HostInfo();
     hostInfo.uUID = device.uuid;
-    HostManager.DelHost(hostInfo);
+    await HostManager.DelHost(hostInfo);
   }
 
 //  rpc GetAllDevice (Empty) returns (DeviceList) {}
@@ -92,7 +92,7 @@ class CommonDeviceApi {
     portInfo.localPort = config.localProt;
     portInfo.networkProtocol = config.networkProtocol;
     portInfo.applicationProtocol = config.applicationProtocol;
-    PortManager.AddPort(portInfo);
+    await PortManager.AddPort(portInfo);
   }
 
 //  rpc DeleteOneTCP (PortConfig) returns (Empty) {}
@@ -105,7 +105,7 @@ class CommonDeviceApi {
     //同步到服务器
     PortInfo portInfo = PortInfo();
     portInfo.uUID = config.uuid;
-    PortManager.DelPort(portInfo);
+    await PortManager.DelPort(portInfo);
   }
 
 //  rpc GetOneTCP (PortConfig) returns (PortConfig) {}
@@ -149,7 +149,7 @@ class CommonDeviceApi {
     portInfo.localPort = config.localProt;
     portInfo.networkProtocol = config.networkProtocol;
     portInfo.applicationProtocol = config.applicationProtocol;
-    PortManager.AddPort(portInfo);
+    await PortManager.AddPort(portInfo);
   }
 
 //  rpc DeleteOneUDP (PortConfig) returns (Empty) {}
@@ -162,7 +162,7 @@ class CommonDeviceApi {
 
     PortInfo portInfo = PortInfo();
     portInfo.uUID = config.uuid;
-    PortManager.DelPort(portInfo);
+    await PortManager.DelPort(portInfo);
   }
 
 //  rpc GetOneUDP (PortConfig) returns (PortConfig) {}
@@ -206,7 +206,7 @@ class CommonDeviceApi {
     portInfo.localPort = config.localProt;
     portInfo.networkProtocol = config.networkProtocol;
     portInfo.applicationProtocol = config.applicationProtocol;
-    PortManager.AddPort(portInfo);
+    await PortManager.AddPort(portInfo);
   }
 
 //  rpc DeleteOneFTP (PortConfig) returns (Empty) {}
@@ -219,7 +219,7 @@ class CommonDeviceApi {
 
     PortInfo portInfo = PortInfo();
     portInfo.uUID = config.uuid;
-    PortManager.DelPort(portInfo);
+    await PortManager.DelPort(portInfo);
   }
 
 //  rpc GetOneFTP (PortConfig) returns (PortConfig) {}
